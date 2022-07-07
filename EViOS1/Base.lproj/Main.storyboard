@@ -93,6 +93,9 @@
                                     <action selector="didTapLoginConnectionButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ujt-EW-rjJ"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="7nw-PS-hjG">
+                                <rect key="frame" x="185" y="412" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -103,8 +106,10 @@
                             <constraint firstItem="GDR-OL-4JH" firstAttribute="top" secondItem="cQK-Wg-iI8" secondAttribute="bottom" constant="20" id="5Ur-S5-P19"/>
                             <constraint firstItem="cQK-Wg-iI8" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.4" id="EFd-dw-ezg"/>
                             <constraint firstAttribute="bottom" secondItem="jSa-Pm-ct4" secondAttribute="bottom" id="FnX-sn-9By"/>
+                            <constraint firstItem="7nw-PS-hjG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HVp-C3-7Ex"/>
                             <constraint firstItem="BOY-dC-7nd" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="K2J-7M-o3d"/>
                             <constraint firstItem="cQK-Wg-iI8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Vhe-qf-Eah"/>
+                            <constraint firstItem="7nw-PS-hjG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cZr-hA-KqO"/>
                             <constraint firstItem="BOY-dC-7nd" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.6" id="cuX-Ay-SRa"/>
                             <constraint firstAttribute="trailing" secondItem="jSa-Pm-ct4" secondAttribute="trailing" id="mtr-ND-p1h"/>
                             <constraint firstItem="GDR-OL-4JH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="qzV-5W-PJF"/>
@@ -118,6 +123,7 @@
                     </view>
                     <connections>
                         <outlet property="backgroundImage" destination="jSa-Pm-ct4" id="k6b-t0-dZ0"/>
+                        <outlet property="busyIndicator" destination="7nw-PS-hjG" id="9Uc-qF-yeO"/>
                         <outlet property="loginConnectionButton" destination="BOY-dC-7nd" id="bkV-yU-PS7"/>
                         <outlet property="loginTextField" destination="afY-0c-9jL" id="SGe-3w-mGB"/>
                         <outlet property="newsletterLabel" destination="Xvl-O3-IuD" id="fxT-bu-5Eu"/>

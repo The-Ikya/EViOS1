@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var newsletterLabel: UILabel!
     @IBOutlet weak var newsletterSwitch: UISwitch!
     @IBOutlet weak var loginConnectionButton: UIButton!
+    @IBOutlet weak var busyIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         profilePicture.image = UIImage(named: "user_icon")
         backgroundImage.image = UIImage(named: "background_image")
+        
+        busyIndicator.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,27 +71,50 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func didTapLoginConnectionButton(_ sender: Any) {
-        var popTitle = "ERROR"
-        var popDescription = ""
-        var popButton = "OK"
-        if !(loginTextField.text?.contains("@") == true) {
-            popDescription = errorAlertPopUp(loginTextField.placeholder!)
+        
+        busyIndicator.startAnimating()
+        busyIndicator.isHidden = false
+        
+        downloadDatas() { title, description, buttonText in
+            DispatchQueue.main.async {
+                self.showLoginPopUp(title: title, description: description, buttonText: buttonText)
+                self.busyIndicator.isHidden = true
+                self.busyIndicator.stopAnimating()
+            }
         }
-        else if passwordTextField.text?.count ?? 0 < 4 {
-            popDescription = errorAlertPopUp(passwordTextField.placeholder!)
-        }
-        else {
-            if newsletterSwitch.isOn {
-                popDescription = "Vous vous etes inscris à la news letter"
+    }
+    
+    func downloadDatas(completionHandler: @escaping (String, String, String) -> Void) {
+        let login = loginTextField.text
+        let password = passwordTextField.text
+        let switchStatus = newsletterSwitch.isOn
+        
+        DispatchQueue.global().async {
+            var popTitle = "ERROR"
+            var popDescription = ""
+            var popButton = "OK"
+            
+            if !(login?.contains("@") == true) {
+                popDescription = self.errorAlertPopUp(.login)
+            }
+            else if password?.count ?? 0 < 4 {
+                popDescription = self.errorAlertPopUp(.password)
             }
             else {
-                popDescription = "Vous ne vous etes pas inscris à la news letter"
+                if switchStatus {
+                    popDescription = "Vous vous etes inscris à la news letter"
+                }
+                else {
+                    popDescription = "Vous ne vous etes pas inscris à la news letter"
+                }
+                popTitle = "Bienvenue \(login!) !"
+                popButton = "Merci !"
+                
+                sleep(3)
             }
-            popTitle = "Bienvenue \(loginTextField.text!) !"
-            popButton = "Merci !"
+            
+            completionHandler(popTitle, popDescription, popButton)
         }
-        
-        showLoginPopUp(title: popTitle, description: popDescription, buttonText: popButton)
     }
     
     func showLoginPopUp(title: String, description: String, buttonText: String) {
@@ -98,15 +124,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         present(alert, animated: true, completion: nil)
     }
     
-    func errorAlertPopUp(_ field: String) -> String {
+    func errorAlertPopUp(_ field: FieldType) -> String {
         var str = ""
         switch field {
-        case "Login":
+        case .login:
             str = "Le login doit contenir au moin un \'@\'"
-        case "Password":
+        case .password:
             str = "Le mot de passe doit contenir au moin 4 caractères"
-        default:
-            str = "Une condition n'est pas respecté"
         }
         
         return str
