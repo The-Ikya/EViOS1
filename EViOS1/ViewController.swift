@@ -36,6 +36,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         profilePicture.image = UIImage(named: "user_icon")
         backgroundImage.image = UIImage(named: "background_image")
+        showPasswordButton.setImage(UIImage(named: "eye_on_icon"), for: .normal)
+        
         
         busyIndicator.isHidden = true
     }
@@ -95,8 +97,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             var popTitle = "ERROR"
             var popDescription = ""
             var popButton = "OK"
+            let predicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
             
-            if !(login?.contains("@") == true) {
+            if !predicate.evaluate(with: login) {
                 popDescription = self.errorAlertPopUp(.login)
             }
             else if password?.count ?? 0 < 4 {
