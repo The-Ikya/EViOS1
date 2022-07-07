@@ -37,6 +37,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         profilePicture.makeRounded()
         loginConnectionButton.backgroundColor = UIColor(named: "darkerGreen")
         loginConnectionButton.layer.cornerRadius = 10
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -60,7 +61,48 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func didTapLoginConnectionButton(_ sender: Any) {
+        var popTitle = "ERROR"
+        var popDescription = ""
+        var popButton = "OK"
+        if !(loginTextField.text?.contains("@") == true) {
+            popDescription = errorAlertPopUp(loginTextField.placeholder!)
+        }
+        else if passwordTextField.text?.count ?? 0 < 4 {
+            popDescription = errorAlertPopUp(passwordTextField.placeholder!)
+        }
+        else {
+            if newsletterSwitch.isOn {
+                popDescription = "Vous vous etes inscris à la news letter"
+            }
+            else {
+                popDescription = "Vous ne vous etes pas inscris à la news letter"
+            }
+            popTitle = "Bienvenue \(loginTextField.text!) !"
+            popButton = "Merci !"
+        }
         
+        showLoginPopUp(title: popTitle, description: popDescription, buttonText: popButton)
+    }
+    
+    func showLoginPopUp(title: String, description: String, buttonText: String) {
+        let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: buttonText, style: .default))
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func errorAlertPopUp(_ field: String) -> String {
+        var str = ""
+        switch field {
+        case "Login":
+            str = "Le login doit contenir au moin un \'@\'"
+        case "Password":
+            str = "Le mot de passe doit contenir au moin 4 caractères"
+        default:
+            str = "Une condition n'est pas respecté"
+        }
+        
+        return str
     }
     
 }
