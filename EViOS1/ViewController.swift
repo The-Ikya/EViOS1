@@ -18,6 +18,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var newsletterSwitch: UISwitch!
     @IBOutlet weak var loginConnectionButton: UIButton!
     
+    var userList = [RegisteredUser]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -79,6 +81,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             popTitle = "Bienvenue \(loginTextField.text!) !"
             popButton = "Merci !"
+            userList.append(RegisteredUser(login: loginTextField.text!, password: passwordTextField.text!, newsletter: newsletterSwitch.isOn))
         }
         
         showLoginPopUp(title: popTitle, description: popDescription, buttonText: popButton)
