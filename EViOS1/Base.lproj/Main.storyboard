@@ -16,10 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_image" translatesAutoresizingMaskIntoConstraints="NO" id="jSa-Pm-ct4">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jSa-Pm-ct4">
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon" translatesAutoresizingMaskIntoConstraints="NO" id="cQK-Wg-iI8">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cQK-Wg-iI8">
                                 <rect key="frame" x="117" y="64" width="156" height="156"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cQK-Wg-iI8" secondAttribute="height" multiplier="1:1" id="HDJ-Nl-G4e"/>
@@ -39,24 +39,29 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES" textContentType="username"/>
                                     </textField>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-kU-PFj">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-kU-PFj">
                                         <rect key="frame" x="0.0" y="88" width="351" height="34"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uM1-G8-44B">
-                                                <rect key="frame" x="0.0" y="0.0" width="298.33333333333331" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="293.33333333333331" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="M8i-ke-XDr"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
-                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye_on_icon" translatesAutoresizingMaskIntoConstraints="NO" id="z07-zb-DwJ">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngk-u5-E9m">
                                                 <rect key="frame" x="298.33333333333331" y="0.0" width="52.666666666666686" height="34"/>
-                                            </imageView>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Button" image="eye_on_icon"/>
+                                                <connections>
+                                                    <action selector="didTapShowPasswordEyeIcon" destination="BYZ-38-t0r" eventType="touchUpInside" id="oEt-ob-gqo"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="z07-zb-DwJ" firstAttribute="width" secondItem="1TJ-kU-PFj" secondAttribute="width" multiplier="0.15" id="3FT-O2-kbX"/>
-                                            <constraint firstItem="z07-zb-DwJ" firstAttribute="height" secondItem="uM1-G8-44B" secondAttribute="height" id="ZXO-Vr-VpR"/>
+                                            <constraint firstItem="ngk-u5-E9m" firstAttribute="width" secondItem="1TJ-kU-PFj" secondAttribute="width" multiplier="0.15" id="9OZ-AO-qKI"/>
+                                            <constraint firstItem="ngk-u5-E9m" firstAttribute="height" secondItem="uM1-G8-44B" secondAttribute="height" id="fuM-YH-ftr"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -112,25 +117,24 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundImage" destination="jSa-Pm-ct4" id="k6b-t0-dZ0"/>
                         <outlet property="loginConnectionButton" destination="BOY-dC-7nd" id="bkV-yU-PS7"/>
                         <outlet property="loginTextField" destination="afY-0c-9jL" id="SGe-3w-mGB"/>
                         <outlet property="newsletterLabel" destination="Xvl-O3-IuD" id="fxT-bu-5Eu"/>
                         <outlet property="newsletterSwitch" destination="wml-cf-7BJ" id="6Le-rc-YTJ"/>
                         <outlet property="passwordTextField" destination="uM1-G8-44B" id="b3Q-Y1-xOc"/>
                         <outlet property="profilePicture" destination="cQK-Wg-iI8" id="nIH-md-bC9"/>
-                        <outlet property="showPasswordEyeIcon" destination="z07-zb-DwJ" id="c06-91-HyR"/>
+                        <outlet property="showPasswordButton" destination="ngk-u5-E9m" id="1oh-kO-ftK"/>
                         <outlet property="welcomeLabel" destination="wng-4O-qCq" id="DET-bO-mEe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-397" y="46"/>
+            <point key="canvasLocation" x="-451" y="45"/>
         </scene>
     </scenes>
     <resources>
-        <image name="background_image" width="853" height="1280"/>
         <image name="eye_on_icon" width="512" height="512"/>
-        <image name="user_icon" width="200" height="200"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

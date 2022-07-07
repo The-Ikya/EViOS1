@@ -9,11 +9,12 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var showPasswordEyeIcon: UIImageView!
+    @IBOutlet weak var showPasswordButton: UIButton!
     @IBOutlet weak var newsletterLabel: UILabel!
     @IBOutlet weak var newsletterSwitch: UISwitch!
     @IBOutlet weak var loginConnectionButton: UIButton!
@@ -27,12 +28,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapShowPasswordEyeIcon))
         tap.numberOfTapsRequired = 1
-        showPasswordEyeIcon.isUserInteractionEnabled = true
-        showPasswordEyeIcon.addGestureRecognizer(tap)
+        showPasswordButton.isUserInteractionEnabled = true
+        showPasswordButton.addGestureRecognizer(tap)
+        
+        profilePicture.image = UIImage(named: "user_icon")
+        backgroundImage.image = UIImage(named: "background_image")
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //TODO
+        super.viewDidAppear(animated)
+        
         profilePicture.backgroundColor = UIColor(named: "darkerGreen")
         profilePicture.makeRounded()
         loginConnectionButton.backgroundColor = UIColor(named: "darkerGreen")
@@ -41,6 +46,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
         view.endEditing(true)
     }
     
@@ -50,12 +57,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    @objc func didTapShowPasswordEyeIcon() {
+    @IBAction func didTapShowPasswordEyeIcon() {
         if passwordTextField.isSecureTextEntry {
-            showPasswordEyeIcon.image = UIImage(named: "eye_off_icon")
+            showPasswordButton.setImage(UIImage(named: "eye_off_icon"), for: .normal)
         }
         else {
-            showPasswordEyeIcon.image = UIImage(named: "eye_on_icon")
+            showPasswordButton.setImage(UIImage(named: "eye_on_icon"), for: .normal)
         }
         passwordTextField.isSecureTextEntry = !passwordTextField.isSecureTextEntry
     }
